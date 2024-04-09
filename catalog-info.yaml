@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "quarkus-camel-demo"
+  description: "Quarkus camel demo"
+  annotations:
+    github.com/project-slug: mronconis/quarkus-camel-demo
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/kubernetes-id: "quarkus-camel-demo"
+    backstage.io/kubernetes-namespace: "rhdh-demo"
+    janus-idp.io/tekton: "quarkus-camel-demo"
+    argocd/app-name: "quarkus-camel-demo"
+  labels:
+    backstage.io/kubernetes-id: "quarkus-camel-demo"
+spec:
+  type: service
+  lifecycle: experimental
+  owner: "group:default/guest"

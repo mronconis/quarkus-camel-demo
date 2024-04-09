@@ -1,0 +1,48 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  annotations:
+    backstage.io/kubernetes-id: "quarkus-camel-demo"
+    backstage.io/kubernetes-namespace: rhdh-demo
+    backstage.io/techdocs-ref: 'dir:.'
+    github.com/project-slug: mronconis/"quarkus-camel-demo"
+    janus-idp.io/tekton-enabled: 'true'
+  name: "quarkus-camel-demo"
+  labels:
+    backstage.io/kubernetes-id: "quarkus-camel-demo"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "quarkus-camel-demo"
+  template:
+    metadata:
+      labels:
+        app: "quarkus-camel-demo"
+        backstage.io/kubernetes-id: "quarkus-camel-demo"
+    spec:
+      containers:
+        - name: "quarkus-camel-demo"
+          image: quay.io/mronconi/quarkus-camel-demo:0.0.1-SNAPSHOT
+          resources:
+            limits:
+              cpu: 100m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 512Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

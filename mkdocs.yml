@@ -1,0 +1,8 @@
+site_name: "quarkus-camel-demo"
+site_description: "Quarkus camel demo"
+
+nav:
+  - Introduction: index.md
+
+plugins:
+  - techdocs-core
